@@ -1,99 +1,143 @@
-# Antoanthongtin
+ĐẠI HỌC ĐẠI NAM - CÔNG NGHỆ THÔNG TIN
+![image](https://github.com/user-attachments/assets/adef89a2-6926-4ade-8b86-eb829227cf95)   
+![image](https://github.com/user-attachments/assets/c52d9805-663b-4cdc-8024-0d312a35667f)
 
-ĐỒ ÁN MÔN HỌC: AN TOÀN VÀ BẢO MẬT THÔNG TIN
-TÊN ĐỀ TÀI: GỬI TẬP TIN NHẠC CÓ BẢN QUYỀN
-
+MÔN HỌC: AN TOÀN VÀ BẢO MẬT THÔNG TIN
+GỬI TẬP TIN NHẠC CÓ BẢN QUYỀN
 TRƯỜNG ĐẠI HỌC ĐẠI NAM
-GIẢNG VIÊN HƯỚNG DẪN: TS. Trần Đăng Công
+Giảng viên hướng dẫn: TS. Trần Đăng Công
+Sinh viên thực hiện – Nhóm 5:
 
-SINH VIÊN THỰC HIỆN – NHÓM 5:
-1. Đặng Thanh Bình
-2. Nguyễn Việt Ninh
-3. Vũ Duy Thái
+Đặng Thanh Bình
 
-------------------------------------------------------------
+Nguyễn Việt Ninh
 
-GIỚI THIỆU HỆ THỐNG
+Vũ Duy Thái
 
-Hệ thống được xây dựng nhằm mô phỏng mô hình giao tiếp giữa client và server sử dụng thuật toán mã hóa bất đối xứng RSA. Đây là một thuật toán mã hóa mạnh, có khả năng bảo mật cao, giúp đảm bảo thông tin được truyền đi giữa client và server không bị đánh cắp hay thay đổi trái phép.
+🎯 Mục tiêu đề tài
+Đề tài tập trung phát triển một hệ thống an toàn cho phép gửi và nhận các tập tin nhạc có bản quyền giữa hai thực thể (Client - Server) nhằm đảm bảo:
 
-Mỗi bên trong hệ thống đều sở hữu một cặp khóa RSA bao gồm khóa công khai và khóa riêng. Việc truyền dữ liệu được thực hiện thông qua mạng nội bộ, dữ liệu sẽ được mã hóa trước khi gửi đi và giải mã khi nhận về để đảm bảo tính toàn vẹn và bảo mật.
+Bảo mật nội dung: Không ai ngoài người nhận hợp lệ có thể mở tập tin nhạc.
 
-------------------------------------------------------------
+Toàn vẹn dữ liệu: Dữ liệu không bị thay đổi trong quá trình truyền tải.
 
-CHỨC NĂNG CHÍNH
+Ngăn chặn truy cập trái phép: Tập tin chỉ giải mã được bởi Server được ủy quyền.
 
-- Sinh cặp khóa RSA cho client và server.
-- Client sử dụng khóa công khai của server để mã hóa dữ liệu trước khi gửi.
-- Server sử dụng khóa riêng để giải mã dữ liệu nhận được.
-- Ghi log toàn bộ quá trình mã hóa, giải mã và truyền tải dữ liệu vào file log.
-- Giao tiếp giữa client và server được thực hiện thông qua Flask API.
+📌 Giới thiệu hệ thống
+Hệ thống truyền tập tin nhạc theo mô hình Client - Server, sử dụng thuật toán mã hóa hiện đại như:
 
-------------------------------------------------------------
+RSA (Asymmetric) để mã hóa khóa.
 
-CẤU TRÚC DỰ ÁN
+AES (Symmetric) để mã hóa nội dung tập tin nhạc.
 
-Thư mục chính `btl` bao gồm các file và thư mục như sau:
+Quy trình tổng quan:
 
-- client_private.pem: Khóa riêng của client.
-- client_public.pem: Khóa công khai của client.
-- server_private.pem: Khóa riêng của server.
-- server_public.pem: Khóa công khai của server.
-- key_generation.log: File log ghi lại quá trình tạo khóa RSA của client.
-- server_key_generation.log: File log ghi lại quá trình tạo khóa RSA của server.
-- Thư mục `btl (2)` chứa mã nguồn chính:
-  - config.py: File cấu hình.
-  - crypto_utils.py: Chứa các hàm xử lý mã hóa và giải mã bằng RSA.
-  - server_flask.py: File chạy server Flask.
-  - Thư mục `client` bên trong:
-    - client_flask.py: File chạy client Flask.
-    - crypto_utils.py: Các tiện ích mã hóa phía client.
+Client mã hóa tập tin nhạc bằng AES với một khóa bí mật (key).
 
-------------------------------------------------------------
+Khóa AES được mã hóa bằng public key RSA của server.
 
-HƯỚNG DẪN CÀI ĐẶT VÀ SỬ DỤNG
+Tập tin và khóa mã hóa được gửi đến Server.
 
-Bước 1: Cài đặt các thư viện cần thiết
-Sử dụng pip để cài đặt các thư viện:
+Server sử dụng private key để giải mã khóa AES, sau đó dùng nó để giải mã tập tin nhạc.
+
+Ghi log quá trình để kiểm tra và xác thực.
+
+🏗️ Kiến trúc hệ thống
+
+CLIENT
+│
+├── Giao diện hoặc CLI để chọn file nhạc
+├── Tạo khóa AES ngẫu nhiên
+├── Mã hóa file bằng AES
+├── Mã hóa khóa AES bằng RSA (Public Key của Server)
+└── Gửi file + khóa đến Server qua Flask API
+        ↓
+      SERVER
+        ↑
+┌────── Nhận file và khóa AES mã hóa
+├────── Giải mã khóa AES bằng Private Key
+├────── Giải mã file nhạc
+├────── Lưu trữ hoặc phát lại file
+└────── Ghi log quá trình gửi/nhận
+
+⚙️ Cấu trúc thư mục dự án
+
+btl/
+├── keys/                            # Chứa public/private key RSA
+│   ├── server_private.pem
+│   └── server_public.pem
+├── music/                           # File nhạc mã hóa/gốc
+├── logs/                            # Lưu các file log truyền tải
+├── README.md                        # Tài liệu mô tả dự án
+└── src/
+    ├── config.py                    # Thông số cấu hình
+    ├── crypto_utils.py              # Mã hóa/giải mã AES & RSA
+    ├── server.py                    # Flask server
+    └── client/
+        ├── client.py                # Giao diện gửi file
+        └── utils.py                 # Hỗ trợ mã hóa file
+🛠️ Công nghệ sử dụng
+Python 3.6+
+
+Thư viện:
+
+cryptography: Mã hóa RSA, AES.
+
+Flask: API server giao tiếp.
+
+logging: Theo dõi quá trình xử lý.
+
+Hệ điều hành: Windows, Linux, macOS.
+
+🚀 Hướng dẫn cài đặt và chạy
+1. Cài thư viện cần thiết:
 
 pip install flask cryptography
+2. Khởi động Server:
 
-Bước 2: Chạy server
-Vào thư mục chứa mã server và chạy file:
+cd src
+python server.py
+3. Gửi tập tin từ Client:
 
-cd "btl/btl (2)"
-python server_flask.py
+cd src/client
+python client.py
+Client sẽ yêu cầu chọn tập tin nhạc → tiến hành mã hóa → gửi đến server.
 
-Bước 3: Chạy client
-Chuyển vào thư mục client và chạy chương trình:
+🔐 Bảo mật và toàn vẹn
+Bảo mật nội dung: Tập tin nhạc được mã hóa bằng AES.
 
-cd "btl/btl (2)/client"
-python client_flask.py
+Bảo mật khóa: Khóa AES được mã hóa bằng RSA.
 
-Bước 4: Gửi và nhận dữ liệu
-- Dữ liệu được gửi từ client đến server dưới dạng đã mã hóa bằng RSA.
-- Server nhận dữ liệu và sử dụng khóa riêng để giải mã.
-- Quá trình mã hóa – giải mã được ghi lại đầy đủ trong file log để phục vụ việc kiểm tra và đánh giá.
+Toàn vẹn: Có thể tích hợp hàm băm SHA256 để kiểm tra dữ liệu.
 
-------------------------------------------------------------
+Lưu vết: Toàn bộ quá trình truyền đều được log ra file.
 
-YÊU CẦU HỆ THỐNG
+📁 File log ví dụ
+File transmission.log chứa:
 
-- Hệ điều hành: Windows / macOS / Linux
-- Python 3.6 trở lên
-- Các thư viện: flask, cryptography, os, logging
+[INFO] 2025-07-06 10:15 - File 'song.mp3' encrypted.
+[INFO] 2025-07-06 10:16 - AES key sent securely.
+[INFO] 2025-07-06 10:17 - File received and decrypted successfully.
+🔄 Khả năng mở rộng
+Tích hợp chữ ký số để xác thực người gửi.
 
-------------------------------------------------------------
+Áp dụng SSL/TLS để bảo vệ kênh giao tiếp.
 
-GIẤY PHÉP VÀ MỤC ĐÍCH
+Cho phép upload nhiều tập tin hoặc cả thư mục.
 
-Dự án này được thực hiện nhằm phục vụ mục đích học tập và nghiên cứu trong khuôn khổ môn học "An toàn và Bảo mật Thông Tin" tại Trường Đại học Đại Nam.
+Thêm UI nền web cho người dùng không biết kỹ thuật.
 
-Tác giả không chịu trách nhiệm nếu mã nguồn được sử dụng sai mục đích hoặc triển khai trong môi trường thực tế mà không có biện pháp bảo vệ thích hợp.
+👨‍💻 Nhóm thực hiện
+Nhóm 5 – Môn học: An toàn và Bảo mật Thông tin
 
-------------------------------------------------------------
+Trường: Đại học Đại Nam
 
-THÔNG TIN LIÊN HỆ
+Giảng viên hướng dẫn: TS. Trần Đăng Công
 
-Nhóm 5 – Môn học An toàn và Bảo mật Thông tin
-Trường Đại học Đại Nam
+Thành viên:
+
+Đặng Thanh Bình
+
+Nguyễn Việt Ninh
+
+Vũ Duy Thái
