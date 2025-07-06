@@ -6,7 +6,7 @@ TÊN ĐỀ TÀI: GỬI TẬP TIN NHẠC CÓ BẢN QUYỀN
 TRƯỜNG ĐẠI HỌC ĐẠI NAM
 GIẢNG VIÊN HƯỚNG DẪN: TS. Trần Đăng Công
 
-SINH VIÊN THỰC HIỆN – NHÓM 12:
+SINH VIÊN THỰC HIỆN – NHÓM 5:
 1. Đặng Thanh Bình
 2. Nguyễn Việt Ninh
 3. Vũ Duy Thái
@@ -95,5 +95,5 @@ Tác giả không chịu trách nhiệm nếu mã nguồn được sử dụng s
 
 THÔNG TIN LIÊN HỆ
 
-Nhóm 12 – Môn học An toàn và Bảo mật Thông tin
+Nhóm 5 – Môn học An toàn và Bảo mật Thông tin
 Trường Đại học Đại Nam
