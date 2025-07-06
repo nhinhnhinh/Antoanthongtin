@@ -1,4 +1,4 @@
-ĐẠI HỌC ĐẠI NAM - CÔNG NGHỆ THÔNG TIN
+ĐẠI HỌC ĐẠI NAM 
 ![image](https://github.com/user-attachments/assets/adef89a2-6926-4ade-8b86-eb829227cf95)   
 ![image](https://github.com/user-attachments/assets/c52d9805-663b-4cdc-8024-0d312a35667f)
 
