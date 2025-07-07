@@ -3,13 +3,21 @@
 Hệ thống client-server để gửi file nhạc được mã hóa với các yêu cầu bảo mật cao, bao gồm:
 
 Mã hóa file: Triple DES (3DES)
+
 Mã hóa metadata: DES
+
 Trao đổi khóa: RSA 1024-bit với OAEP và SHA-256
+
 Chữ ký số: RSA 1024-bit với SHA-512
+
 Kiểm tra tính toàn vẹn: SHA-512
+
 Hybrid Encryption: Kết hợp AES và RSA cho việc mã hóa khóa
+
 Quản lý khóa tự động: Sinh key mới khi kết nối
+
 Giao diện web: Dashboard với auto-refresh
+
 🏗️ Kiến trúc hệ thống
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
 │   Client    │    │   Server    │    │   Uploads   │
@@ -23,23 +31,24 @@ Giao diện web: Dashboard với auto-refresh
 │   Gen       │    │   Gen       │    │             │
 └─────────────┘    └─────────────┘    └─────────────┘
 🔐 Tính năng bảo mật
+
 1. Mã hóa File (Triple DES)
 Sử dụng Triple DES với mode CBC
 Session key 24 bytes được sinh ngẫu nhiên
 IV 8 bytes ngẫu nhiên cho mỗi file
-2. Mã hóa Metadata (DES)
+3. Mã hóa Metadata (DES)
 Metadata chứa tên file và thông tin copyright
 Mã hóa bằng DES với mode ECB
 Meta key 8 bytes ngẫu nhiên
-3. Hybrid Encryption cho Khóa
+4. Hybrid Encryption cho Khóa
 Combo key (session + meta) được mã hóa bằng AES-CBC
 AES key được mã hóa bằng RSA 1024-bit + OAEP + SHA-256
 Giảm overhead so với RSA + SHA-512
-4. Chữ ký số và Hash
+5. Chữ ký số và Hash
 Hash toàn bộ file bằng SHA-512
 Chữ ký số bằng RSA 1024-bit + SHA-512
 Đảm bảo tính toàn vẹn và xác thực
-5. Quản lý khóa tự động
+6. Quản lý khóa tự động
 Tự động sinh cặp RSA key mới khi kết nối
 Lưu lịch sử sinh key
 Quản lý khóa thủ công và tự động
