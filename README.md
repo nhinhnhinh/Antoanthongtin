@@ -1,6 +1,7 @@
 # 🎵 Hệ Thống Mã Hóa File Nhạc Bảo Mật
 
 ## 📋 Mô tả
+![image](https://github.com/user-attachments/assets/9e34f92b-4434-48a8-b098-e5599d2e9370)
 
 Hệ thống client-server để gửi file nhạc được mã hóa với các yêu cầu bảo mật cao, bao gồm:
 - **Mã hóa file**: Triple DES (3DES)
